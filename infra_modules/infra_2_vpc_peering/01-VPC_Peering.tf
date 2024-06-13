@@ -26,7 +26,7 @@ resource "google_compute_network_peering" "peer" {
 resource "google_compute_network_peering" "peer-reverse" {
   count = length(var.peering_config)
 
-  name         = format("${var.env}-peering-cx-%s", count.index + 3)
+  name         = format("${var.env}-peering-cx-%s", count.index + length(var.peering_config) + 2)
   network      = data.google_compute_network.peer-network-nfo[count.index].self_link
   peer_network = data.google_compute_network.network-nfo[count.index].self_link
 
